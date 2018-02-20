@@ -4,13 +4,10 @@
 		<h3> <%= @location.name %> </h3>
 
 		<p>
-			Submitted <%=time_ago_in_words(@location.created_at)%> Ago
-			
-
 			<%  if (user_signed_in? &&(current_user.id == @location.user_id)) %>
 				
 
-				| <%= link_to "Edit", (@location) %>
+				| <%= link_to "Edit", edit_location_path(@location) %>
 				| <%= link_to "Delete", location_path(@location), method: :delete,
 				data: {confirm: 'Are you sure?'} %>
 
@@ -18,7 +15,7 @@
 
 		</p>
 
-		<p> <%= sanitize @location.name %></p>
+		<p> <%= @location.name %></p>
 		<div>
 			<h5> <%= @location.recordings.count %> Recordings
 			</h5>
@@ -26,7 +23,7 @@
 			<%= render @location.recordings %>
 
 
-			<h6>Add a recording </h6>
+			<h5>Add a recording </h5>
 
 			<%= render 'recordings/form'  %>
 

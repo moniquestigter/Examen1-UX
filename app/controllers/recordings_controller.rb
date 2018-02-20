@@ -12,12 +12,28 @@ class RecordingsController < ApplicationController
 
 	def update
 		@location = Location.find(params[:id])
+		@recording = @location.recordings.find(params[:id])
 
-		if @location.update(location_params)
-			redirect_to @recordings
-		else
-			render 'edit'
-		end
+		@recording.update_attributes(recording_param)
+    	if @recording.save
+        	redirect_to @location
+    	else
+        	render 'edit'
+    	end
+	end
+
+	def edit
+    	@location = Location.find(params[:id])
+    	@recording = @location.recordings.find(params[:id])
+	end
+
+	def destroy
+		@location = Location.find(params[:id])
+
+		@recording = @location.recordings.find(params[:id])
+		@recording.destory
+
+		redirect_to location_path(@location)
 	end
 
 	private
