@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219235529) do
+ActiveRecord::Schema.define(version: 20180220015036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20180219235529) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "recordings", force: :cascade do |t|
@@ -27,7 +29,9 @@ ActiveRecord::Schema.define(version: 20180219235529) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["location_id"], name: "index_recordings_on_location_id"
+    t.index ["user_id"], name: "index_recordings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +53,5 @@ ActiveRecord::Schema.define(version: 20180219235529) do
   end
 
   add_foreign_key "recordings", "locations"
+  add_foreign_key "recordings", "users"
 end

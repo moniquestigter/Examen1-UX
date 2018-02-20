@@ -9,6 +9,11 @@
   </head>
 
   <body>
+  <%= render 'partials/navbar' %>
+
+  <div class ="container">
+    <%= render 'partials/messages' %>
     <%= yield %>
+    </div>
   </body>
 </html>
